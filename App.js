@@ -7,22 +7,31 @@ import {
   Image,
   Pressable,
 } from "react-native";
+import { useState } from "react";
 import { ActivityIndicator } from "react-native-web";
+import Paragraphes from "./components/Paragraphes";
 
 export default function App() {
   const handlePress = () => {
     console.log("PRESSABLE ALERT");
     alert(null, "Button pressed");
+    setShowLoading(true);
   };
+
+  const [showLoading, setShowLoading] = useState(false);
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.whiteBg}>
-        <Text style={(styles.text, styles.big)}>Ceci est du texte</Text>
-        <Text style={(styles.text, styles.centered)}>Et encore du texte</Text>
-        <Text style={(styles.text, styles.bold)}>
-          Bon je crois qu'on a compris...
-        </Text>
+        <Paragraphes style={(styles.text, styles.big)} children="Du texte" />
+        <Paragraphes
+          style={(styles.text, styles.centered)}
+          children="Encore du texte"
+        />
+        <Paragraphes
+          style={(styles.text, styles.bold)}
+          children="Encore PLUUUS de texte"
+        />
         <Image
           source={{
             uri: "https://www.konexio.eu/uploads/1/2/0/2/120245745/konexio-logo_1.png",
@@ -33,7 +42,7 @@ export default function App() {
         <Pressable onPress={handlePress}>
           <Text>Click me!</Text>
         </Pressable>
-        <ActivityIndicator size="large" />
+        {showLoading && <ActivityIndicator size="large" />}
       </View>
     </ScrollView>
   );
