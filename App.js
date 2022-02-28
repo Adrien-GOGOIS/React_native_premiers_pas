@@ -1,30 +1,54 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Image,
+  Pressable,
+} from "react-native";
+import { ActivityIndicator } from "react-native-web";
 
 export default function App() {
+  const handlePress = () => {
+    console.log("PRESSABLE ALERT");
+    alert(null, "Button pressed");
+  };
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.whiteBg}>
         <Text style={(styles.text, styles.big)}>Ceci est du texte</Text>
         <Text style={(styles.text, styles.centered)}>Et encore du texte</Text>
         <Text style={(styles.text, styles.bold)}>
           Bon je crois qu'on a compris...
         </Text>
+        <Image
+          source={{
+            uri: "https://www.konexio.eu/uploads/1/2/0/2/120245745/konexio-logo_1.png",
+          }}
+          alt="Logo Konexio"
+        />
+        {/* <Image source={require("./assets/konexio-logo_1.png")} alt="" /> */}
+        <Pressable onPress={handlePress}>
+          <Text>Click me!</Text>
+        </Pressable>
+        <ActivityIndicator size="large" />
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 255, 0.5)",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "rgba(80, 150, 250, 0.8)",
   },
 
   whiteBg: {
     backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   text: {
